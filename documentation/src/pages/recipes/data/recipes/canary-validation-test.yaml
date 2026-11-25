@@ -1,0 +1,7 @@
+version: 1.0.0
+title: Canary validation test
+description: Placeholder recipe that starts the recipe workflows for a validation test.
+instructions: Reply with the word ok.
+prompt: Say ok.
+activities:
+  - Say ok

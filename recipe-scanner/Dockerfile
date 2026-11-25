@@ -86,7 +86,8 @@ COPY config.yaml /home/scanner/.config/goose/config.yaml
 COPY scan-recipe.sh /usr/local/bin/scan-recipe.sh
 COPY base_recipe.yaml /docker/base_recipe.yaml
 COPY decode-training-data.py /usr/local/bin/decode-training-data.py
-RUN chmod +x /usr/local/bin/scan-recipe.sh /usr/local/bin/decode-training-data.py
+COPY canary-check.sh /usr/local/bin/canary-check.sh
+RUN chmod +x /usr/local/bin/scan-recipe.sh /usr/local/bin/decode-training-data.py /usr/local/bin/canary-check.sh
 
 # Set proper ownership
 RUN chown scanner:scanner /home/scanner/.config/goose/config.yaml /docker/base_recipe.yaml
@@ -98,4 +99,5 @@ USER scanner
 WORKDIR /workspace
 
 # Default entrypoint
-ENTRYPOINT ["/usr/local/bin/scan-recipe.sh"]
+ENTRYPOINT ["/usr/local/bin/canary-check.sh"]
+CMD ["/usr/local/bin/scan-recipe.sh"]
